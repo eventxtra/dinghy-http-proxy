@@ -1,7 +1,7 @@
 FROM golang:1.16.6 as builder
 WORKDIR /go/src/github.com/codekitchen/dinghy-http-proxy
+RUN go mod init
 COPY join-networks.go .
-RUN go env -w GO111MODULE=auto
 RUN GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go get -v github.com/fsouza/go-dockerclient
 RUN GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -v -o join-networks
 
